@@ -1,0 +1,370 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #121212; /* 更深的背景，更适合电影展示 */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+/* 全局盒模型重置 */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+  transition: color 0.25s;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  /* 取消原有的居中，改为自然流式布局 */
+  display: block;
+  padding-bottom: 4rem; /* 底部留空，避免内容被遮挡 */
+}
+
+/* 导航栏样式 */
+nav {
+  background-color: #1e1e1e; /* 导航栏深色背景 */
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100; /* 确保导航栏在最上层 */
+}
+
+nav a {
+  margin-right: 2rem;
+  font-size: 1.1em;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+/* 导航链接下划线动画 */
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #646cff;
+  transition: width 0.25s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* 页面容器（统一控制所有页面的宽度和居中） */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* 标题样式 */
+h1 {
+  font-size: 2.2em;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  border-bottom: 2px solid #646cff;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+h3 {
+  font-size: 1.4em;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+}
+
+/* 电影列表卡片布局 */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.movie-card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-bottom: 2px solid #646cff;
+}
+
+.movie-info {
+  padding: 1.2rem;
+}
+
+.movie-info p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.movie-info .category-tag {
+  display: inline-block;
+  background-color: #646cff33;
+  color: #646cff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8em;
+  margin-right: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+/* 表单样式 */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-size: 1.05em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #2d2d2d;
+  color: #ffffff;
+  font-size: 1em;
+  transition: border-color 0.25s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.2);
+}
+
+/* 下拉框特殊样式 */
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(255,255,255,0.7)' viewBox='0 0 16 16'%3E%3Cpath d='M8 11l4-4H4l4 4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+}
+
+/* 按钮样式优化 */
+.btn {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-right: 1rem;
+}
+
+.btn-primary {
+  background-color: #646cff;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #535bf2;
+  border-color: #535bf2;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: #646cff;
+  color: #646cff;
+}
+
+.btn-outline:hover {
+  background-color: #646cff1a;
+}
+
+/* 电影详情页样式 */
+.movie-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.movie-detail-poster {
+  flex: 0 0 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.movie-detail-poster img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-detail-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.movie-detail-info p {
+  margin-bottom: 1rem;
+  font-size: 1.1em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.movie-detail-info .detail-label {
+  font-weight: 600;
+  color: #646cff;
+  margin-right: 0.5rem;
+}
+
+.detail-actions {
+  margin-top: 2rem;
+}
+
+/* 加载状态样式 */
+.loading {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 响应式适配（手机端） */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .movie-poster {
+    height: 240px;
+  }
+
+  nav {
+    padding: 1rem;
+  }
+
+  nav a {
+    margin-right: 1rem;
+    font-size: 1em;
+  }
+
+  .movie-detail {
+    gap: 1.5rem;
+  }
+
+  .movie-detail-poster {
+    flex: 0 0 100%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+}
+
+/* 浅色模式适配 */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #f8fafc;
+  }
+
+  nav {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h1,
+  h3 {
+    color: #213547;
+  }
+
+  .movie-card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .movie-info p {
+    color: #475569;
+  }
+
+  .movie-info .category-tag {
+    background-color: #646cff1a;
+    color: #646cff;
+  }
+
+  .form-control {
+    background-color: #ffffff;
+    color: #213547;
+    border: 1px solid #e2e8f0;
+  }
+
+  .form-group label {
+    color: #213547;
+  }
+
+  .movie-detail-info p {
+    color: #475569;
+  }
+
+  .loading {
+    color: #475569;
+  }
+}
