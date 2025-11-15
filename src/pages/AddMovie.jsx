@@ -18,7 +18,9 @@ function AddMovie() {
   useEffect(() => {
     const fetchCategories = async () => {
       const { data, error } = await supabase.from('categories').select('*')
-      if (error) console.error(error)
+      if (error) {
+      console.error('分类数据请求失败：', error.message) // 新增错误打印
+    }
       setCategories(data || [])
     }
     fetchCategories()
