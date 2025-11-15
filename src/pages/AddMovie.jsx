@@ -19,8 +19,8 @@ function AddMovie() {
     const fetchCategories = async () => {
       const { data, error } = await supabase.from('categories').select('*')
       if (error) {
-      console.error('分类数据请求失败：', error.message) // 新增错误打印
-    }
+        console.error('分类数据请求失败：', error.message)
+      }
       setCategories(data || [])
     }
     fetchCategories()
@@ -69,101 +69,103 @@ function AddMovie() {
   }
 
   return (
-    // 替换原来的表单布局
-<div className="container">
-  <h1>添加电影</h1>
-  <form onSubmit={handleSubmit}>
-    <div className="form-group">
-      <label htmlFor="title">电影名称</label>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        value={formData.title}
-        onChange={handleChange}
-        required
-        className="form-control"
-      />
-    </div>
+    <div className="container">
+      <h1>添加电影</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="title">电影名称</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
 
-    <div className="form-group">
-      <label htmlFor="poster_url">海报链接</label>
-      <input
-        type="url"
-        id="poster_url"
-        name="poster_url"
-        value={formData.poster_url}
-        onChange={handleChange}
-        className="form-control"
-      />
-    </div>
+        <div className="form-group">
+          <label htmlFor="poster_url">海报链接</label>
+          <input
+            type="url"
+            id="poster_url"
+            name="poster_url"
+            value={formData.poster_url}
+            onChange={handleChange}
+            className="form-control"
+            placeholder="如无海报可留空，将显示默认图片"
+          />
+        </div>
 
-    <div className="form-group">
-      <label htmlFor="release_year">上映年份</label>
-      <input
-        type="number"
-        id="release_year"
-        name="release_year"
-        value={formData.release_year}
-        onChange={handleChange}
-        required
-        className="form-control"
-      />
-    </div>
+        <div className="form-group">
+          <label htmlFor="release_year">上映年份</label>
+          <input
+            type="number"
+            id="release_year"
+            name="release_year"
+            value={formData.release_year}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
 
-    <div className="form-group">
-      <label htmlFor="rating">评分</label>
-      <input
-        type="number"
-        id="rating"
-        name="rating"
-        step="0.1"
-        value={formData.rating}
-        onChange={handleChange}
-        required
-        className="form-control"
-      />
-    </div>
+        <div className="form-group">
+          <label htmlFor="rating">评分</label>
+          <input
+            type="number"
+            id="rating"
+            name="rating"
+            step="0.1"
+            min="0"
+            max="10"
+            value={formData.rating}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
 
-    <div className="form-group">
-      <label htmlFor="status">状态</label>
-      <select
-        id="status"
-        name="status"
-        value={formData.status}
-        onChange={handleChange}
-        className="form-control"
-      >
-        <option value="want">想看</option>
-        <option value="watching">在看</option>
-        <option value="watched">已看</option>
-      </select>
-    </div>
+        <div className="form-group">
+          <label htmlFor="status">状态</label>
+          <select
+            id="status"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className="form-control"
+          >
+            <option value="want">想看</option>
+            <option value="watching">在看</option>
+            <option value="watched">已看</option>
+          </select>
+        </div>
 
-    <div className="form-group">
-      <label htmlFor="category_ids">电影分类</label>
-      <select
-        id="category_ids"
-        name="category_ids"
-        multiple
-        onChange={handleCategoryChange}
-        className="form-control"
-      >
-        {categories.map(category => (
-          <option key={category.id} value={category.id}>{category.name}</option>
-        ))}
-      </select>
-    </div>
+        <div className="form-group">
+          <label htmlFor="category_ids">电影分类</label>
+          <select
+            id="category_ids"
+            name="category_ids"
+            multiple
+            onChange={handleCategoryChange}
+            className="form-control"
+          >
+            {categories.map(category => (
+              <option key={category.id} value={category.id}>{category.name}</option>
+            ))}
+          </select>
+        </div>
 
-    <button 
-      type="submit" 
-      disabled={loading}
-      className="btn btn-primary"
-    >
-      {loading ? '提交中...' : '添加电影'}
-    </button>
-  </form>
-</div>
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="btn btn-primary"
+        >
+          {loading ? '提交中...' : '添加电影'}
+        </button>
+      </form>
+    </div>
   )
 }
 

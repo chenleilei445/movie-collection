@@ -11,7 +11,7 @@ function MoviesList() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        // 获取电影数据（关联分类，处理外键可能的空值）
+        // 获取电影数据（关联分类）
         const { data: moviesData, error: moviesError } = await supabase
           .from('movies')
           .select(`
@@ -32,7 +32,7 @@ function MoviesList() {
         
         if (categoriesError) throw new Error(`获取分类失败：${categoriesError.message}`)
 
-        // 整理电影数据（处理分类可能为空的情况，避免报错）
+        // 整理电影数据
         const formattedMovies = moviesData?.map(movie => {
           const movieCategories = movie.movie_categories 
             ? movie.movie_categories
@@ -43,7 +43,7 @@ function MoviesList() {
           return { 
             ...movie, 
             categories: movieCategories,
-            // 处理海报链接为空的情况，设置默认图
+            // 设置默认海报
             poster_url: movie.poster_url || 'https://via.placeholder.com/300x450?text=暂无海报'
           }
         }) || []
@@ -91,7 +91,7 @@ function MoviesList() {
             onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
             onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            {/* 海报图片（修复style重复问题） */}
+            {/* 海报图片 */}
             <div className="movie-poster" style={{
               height: '375px',
               overflow: 'hidden',
@@ -104,14 +104,12 @@ function MoviesList() {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  opacity: 0, // 初始透明
-                  transition: 'opacity 0.3s ease' // 过渡效果
+                  opacity: 0,
+                  transition: 'opacity 0.3s ease'
                 }}
-                // 图片加载完成后设置不透明
                 onLoad={(e) => {
                   e.target.style.opacity = 1
                 }}
-                // 图片加载失败时显示默认占位图
                 onError={(e) => {
                   e.target.src = 'https://via.placeholder.com/300x450?text=海报加载失败'
                   e.target.style.opacity = 1
